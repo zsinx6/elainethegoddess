@@ -2,34 +2,38 @@
 -- é preciso verificar se o total de alocações de credenciais daquele tipo não excede o total disponível para o comitê
 -- (determinado na tabela limites_comite).
 
-CREATE OR REPLACE FUNCTION verifica_limites_comite (orgao_imp integer, tipocred varchar(4), qtd integer) RETURNS boolean AS $$
+CREATE OR REPLACE FUNCTION verifica_limites_comite (orgao_id integer, tipo_cred varchar(4), qtd integer) RETURNS boolean AS $$
 DECLARE
 	alocado integer;
 	limite integer;
 	com varchar(50);
 BEGIN
 
-	--Obtendo o comitê em questão
+	-- Obtendo o comitê do órgão de imprensa em questão.
 	select comite
 	into com
 	from orgao_imprensa oi
-	where oi.id = orgao_imp;
+	where oi.id = orgao_id;
 
-	-- contando a quantidade de credenciais desse tipo ja alocadas pelo comitê
+	-- Contando a quantidade de credenciais do tipo em questão já alocadas pelo comitê.
 	select sum(lim.quantidade)
 	into alocado
 	from limites_oi lim join orgao_imprensa oi on lim.orgao_imprensa = oi.id
-	where oi.comite = com and lim.tipo_credencial = tipocred;
+	where oi.comite = com and lim.tipo_credencial = tipo_cred;
 
 	IF (alocado IS NULL) THEN
 		alocado = 0;
 	END IF;
 
-	--obtendo o limite do comitê para o tipo de credencial envolvido
+	-- Obtendo o limite do comitê para o tipo de credencial em questão.
 	select lim.quantidade
 	into limite
 	from limites_comite lim
-	where tipocred = lim.tipo_credencial and lim.comite = com;
+	where tipo_cred = lim.tipo_credencial and lim.comite = com;
+
+	IF (limite IS NULL) THEN	-- Nunca deve ocorrer, pois a inserção na tabela limites_comite é automática via trigger.
+		limite = 0;
+	END IF;
 	
 	IF (alocado+qtd <= limite) THEN
 		RETURN TRUE;
@@ -43,24 +47,24 @@ $$ LANGUAGE plpgsql;
 -- Para uma nova credencial de certo tipo ser criada e associada a certo órgão de imprensa, é preciso verificar se 
 -- o comitê ao qual o OI está associado ainda tem credenciais disponíveis que sejam daquele tipo e estejam alocadas ao OI em questão.
 -- Em outras palavras, é preciso verificar se o OI já não atingiu o limite de credenciais do tipo em questão que está especificado
--- em limites_oi
-CREATE OR REPLACE FUNCTION verifica_limites_oi (orgao_id integer, tipocred varchar(4)) RETURNS boolean AS $$
+-- em limites_oi.
+CREATE OR REPLACE FUNCTION verifica_limites_oi (orgao_id integer, tipo_cred varchar(4)) RETURNS boolean AS $$
 DECLARE
 	limite integer;
 	usado integer;
 BEGIN
 	
-	-- contando a quantidade de credenciais desse tipo ja alocadas pelo comitê ao órgão de imprensa em questão
+	-- Contando a quantidade de credenciais desse tipo ja alocadas pelo comitê ao órgão de imprensa em questão.
 	select count(*)
 	into usado
 	from credencial cred
-	where cred.orgao_imprensa = orgao_id and cred.tipo = tipocred;
+	where cred.orgao_imprensa = orgao_id and cred.tipo = tipo_cred;
 
-	--obtendo o limite do comitê para o tipo de credencial e órgão de imprensa envolvido
+	-- Obtendo o limite que o comitê estabeleceu para o tipo de credencial e órgão de imprensa envolvidos.
 	select lim.quantidade
 	into limite
 	from limites_oi lim
-	where lim.tipo_credencial = tipocred and lim.orgao_imprensa = orgao_id;
+	where lim.tipo_credencial = tipo_cred and lim.orgao_imprensa = orgao_id;
 
 	IF (usado < limite) THEN
 		RETURN TRUE;

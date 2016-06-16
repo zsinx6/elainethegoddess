@@ -1,6 +1,6 @@
 CREATE TABLE comite
 (
-	pais varchar(30) DEFAULT '-' NOT NULL,
+	pais varchar(30) DEFAULT '-' NOT NULL,	-- O traço (-) representa o Comitê Paralímpico Internacional (IPC), o qual não tem país.
 	nome varchar(50),
 	presidente varchar(70),
 	email_contato varchar(80),
@@ -40,11 +40,12 @@ CREATE TABLE credencial
 	FOREIGN KEY(orgao_imprensa) REFERENCES orgao_imprensa(id) ON DELETE CASCADE,
 	FOREIGN KEY (tipo) REFERENCES tipo_credencial(sigla) ON DELETE CASCADE--,
 	--CHECK(verifica_limites_oi(orgao_imprensa, tipo))
+	--O CHECK garante que não será possível vincular mais credenciais de certo tipo a um OI do que é especificado na tabela limites_oi
 );
 
 CREATE TABLE profissional_imprensa
 (
-	passaporte varchar(8),
+	passaporte char(8),
 	email varchar(80),
 	cpf char(11),
 	data_nascimento date,
@@ -78,4 +79,5 @@ CREATE TABLE limites_oi
 	FOREIGN KEY (tipo_credencial) REFERENCES tipo_credencial(sigla) ON DELETE CASCADE,
 	FOREIGN KEY (orgao_imprensa) REFERENCES orgao_imprensa(id) ON DELETE CASCADE,
 	CHECK(verifica_limites_comite(orgao_imprensa, tipo_credencial, quantidade))
+	--O CHECK garante que não será possível que um comitê aloque a seus OIs mais credenciais de certo tipo do que possui disponível (especificado na tabela limites_comite)
 );
