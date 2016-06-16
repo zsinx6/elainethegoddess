@@ -3,6 +3,9 @@ from PyQt5 import QtWidgets
 
 
 def select(tabela, attr=None):
+    """ recebe o nome da tabela e os atributos a serem selecionados
+        se attr=None seleciona todos atributos
+    """
     try:
         conn = psycopg2.connect("dbname=BD user=lucas")
         cur = conn.cursor()
@@ -13,10 +16,11 @@ def select(tabela, attr=None):
     if not attr:
         attr = '*'
     else:
+        #concatena a lista seperando cada item com uma comma
         attr = ','.join(attr)
     cmd = 'SELECT ' + attr + ' FROM ' + tabela + ';'
-    print(cmd)
     try:
+        #executa o sql
         cur.execute(cmd)
         conn.commit()
         ret = cur.fetchall()
@@ -30,6 +34,10 @@ def select(tabela, attr=None):
 
 
 def insert(tabela, kwargs):
+    """ insere dados passados no kwargs na table tabela
+        formato do kwargs:
+        [nome_attr1 => valor1, ..., nome_attr_k => valor_k]
+    """
     try:
         conn = psycopg2.connect("dbname=BD user=lucas")
         cur = conn.cursor()
@@ -57,6 +65,9 @@ def insert(tabela, kwargs):
 
 
 def showdialog(titulo, texto):
+    """ mostra em uma janela de dialogo com o titulo passado como arg.
+        Mostrando o valor da variavel texto
+    """
     msg = QtWidgets.QMessageBox()
     msg.setIcon(QtWidgets.QMessageBox.Critical)
     msg.setText(texto)
