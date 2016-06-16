@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>415</width>
+    <height>407</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>415</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuAdicionar">
+    <property name="title">
+     <string>Adicionar</string>
+    </property>
+    <addaction name="actionProfissional_de_Imprensa"/>
+    <addaction name="actionTipo_Credencial"/>
+    <addaction name="actionComite"/>
+    <addaction name="actionOrg_o_de_Imprensa"/>
+    <addaction name="actionCredencial"/>
+    <addaction name="actionLimites_Comite"/>
+    <addaction name="actionLimites_Org_o_de_Imprensa"/>
+   </widget>
+   <widget class="QMenu" name="menuBuscar">
+    <property name="title">
+     <string>Buscar</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuSobre">
+    <property name="title">
+     <string>Sobre</string>
+    </property>
+   </widget>
+   <addaction name="menuAdicionar"/>
+   <addaction name="menuBuscar"/>
+   <addaction name="menuSobre"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actionProfissional_de_Imprensa">
+   <property name="text">
+    <string>Profissional de Imprensa</string>
+   </property>
+  </action>
+  <action name="actionTipo_Credencial">
+   <property name="text">
+    <string>Tipo Credencial</string>
+   </property>
+  </action>
+  <action name="actionComite">
+   <property name="text">
+    <string>Comite</string>
+   </property>
+  </action>
+  <action name="actionOrg_o_de_Imprensa">
+   <property name="text">
+    <string>Orgão de Imprensa</string>
+   </property>
+  </action>
+  <action name="actionCredencial">
+   <property name="text">
+    <string>Credencial</string>
+   </property>
+  </action>
+  <action name="actionLimites_Comite">
+   <property name="text">
+    <string>Limites Comite</string>
+   </property>
+  </action>
+  <action name="actionLimites_Org_o_de_Imprensa">
+   <property name="text">
+    <string>Limites Orgão de Imprensa</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
