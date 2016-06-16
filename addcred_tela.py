@@ -15,17 +15,25 @@ class add_credencial(QtWidgets.QWidget):
         super(add_credencial, self).__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+
+        #busca do banco de dados os ids de todos orgaos de imprensa
         oi = select('orgao_imprensa', ['id'])
         self.eval_comboboxoi(oi)
+
+        #seleciona a sigla de todos os tipos de credencial
         tipo = select('tipo_credencial', ['sigla'])
         self.eval_comboboxtipo(tipo)
         self.connect_signals()
 
     def eval_comboboxoi(self, lista):
+        """adiciona lista em no combobox
+        """
         for item in lista:
             self.ui.qcombooi.addItem(str(item[0]))
 
     def eval_comboboxtipo(self, lista):
+        """adiciona lista em combobox qcombotipo
+        """
         for item in lista:
             self.ui.qcombotipo.addItem(str(item[0]))
 
@@ -33,6 +41,8 @@ class add_credencial(QtWidgets.QWidget):
         self.ui.addbutton.clicked.connect(self.addbutton_click)
 
     def addbutton_click(self):
+        """adiciona crendencial
+        """
         tipo = self.ui.qcombotipo.currentText()
         oi = self.ui.qcombooi.currentText()
         kwargs = {'tipo': "'" + tipo + "'",

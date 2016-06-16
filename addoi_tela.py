@@ -12,6 +12,9 @@ from bdconn import insert, select, showdialog
 
 class add_oi(QtWidgets.QWidget):
     def __init__(self, parent=None):
+        """inicia a tela e seleciona o nome de todos os comites
+            para adicionalos em um combobox
+        """
         super(add_oi, self).__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -20,6 +23,8 @@ class add_oi(QtWidgets.QWidget):
         self.connect_signals()
 
     def eval_combobox(self, lista):
+        """adiciona lista na combobox do comite
+        """
         for item in lista:
             self.ui.qcombocomite.addItem(item[0])
 
@@ -27,6 +32,9 @@ class add_oi(QtWidgets.QWidget):
         self.ui.addbutton.clicked.connect(self.addbutton_click)
 
     def addbutton_click(self):
+        """ pega do formulario nome, endereco, nome_representante,
+            email_representante, comite e adiciona na tabela orgao_imprensa
+        """
         nome = self.ui.qlinenome.text()
         endereco = self.ui.qlineend.text()
         nome_representante = self.ui.qlinenomerepr.text()

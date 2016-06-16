@@ -10,6 +10,8 @@ from addpi import Ui_Form
 
 
 class add_pi(QtWidgets.QWidget):
+    """adiciona profissional de imprensa
+    """
     def __init__(self, parent = None):
         super(add_pi, self).__init__()
         self.ui = Ui_Form()

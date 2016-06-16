@@ -16,11 +16,14 @@ class add_comite(QtWidgets.QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.connect_signals()
-
     def connect_signals(self):
         self.ui.addbutton.clicked.connect(self.addbutton_click)
 
     def addbutton_click(self):
+        """ manipulador do evento click do mouse para adicionar comite
+            utiliza a funcao insert (definida no arquivo bdconn.py) passando
+            como argumento kwargs
+        """
         pais = self.ui.qlinepais.text()
         nome = self.ui.qlinenome.text()
         presidente = self.ui.qlinepres.text()
