@@ -208,7 +208,7 @@ DECLARE
 	tipo varchar(4);
 BEGIN
 	for tipo in select sigla from tipo_credencial loop
-		insert into limites_oi(tipo_credencial, orgao_imprensa, quanitdade) values (tipo, new.id, default);
+		insert into limites_oi(tipo_credencial, orgao_imprensa, quantidade) values (tipo, new.id, default);
 	end loop;
 	RETURN new;
 END;
