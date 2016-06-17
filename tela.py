@@ -13,6 +13,7 @@ import addtipocred_tela
 import addcomite_tela
 import addoi_tela
 import addcred_tela
+import editlimitescomite_tela
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -23,12 +24,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.connect_signals()
         self.cont = 0
-        '''conn = psycopg2.connect("dbname=DB_Test user=lucas")
-        cur = conn.cursor()
-        cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
-        conn.commit()
-        cur.close()
-        conn.close()'''
 
     def connect_signals(self):
         self.ui.actionProfissional_de_Imprensa.\
@@ -41,6 +36,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 connect(lambda: self.add_widget('oi'))
         self.ui.actionCredencial.triggered.\
                 connect(lambda: self.add_widget('cred'))
+        self.ui.actionLimites_Comite.triggered.\
+                connect(lambda: self.add_widget('limitescomite'))
 
     def add_widget(self, tipo):
         try:
@@ -61,6 +58,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.widget = addoi_tela.add_oi(self.dw.widget())
         elif(tipo == 'cred'):
             self.widget = addcred_tela.add_credencial(self.dw.widget())
+        elif(tipo == 'limitescomite'):
+            self.widget = editlimitescomite_tela.edit_limitescomite(self.dw.widget())
         self.dw.setWidget(self.widget)
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.dw)
 

@@ -32,8 +32,6 @@
     <addaction name="actionComite"/>
     <addaction name="actionOrg_o_de_Imprensa"/>
     <addaction name="actionCredencial"/>
-    <addaction name="actionLimites_Comite"/>
-    <addaction name="actionLimites_Org_o_de_Imprensa"/>
    </widget>
    <widget class="QMenu" name="menuBuscar">
     <property name="title">
@@ -45,7 +43,15 @@
      <string>Sobre</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuAlterar">
+    <property name="title">
+     <string>Alterar</string>
+    </property>
+    <addaction name="actionLimites_Comite"/>
+    <addaction name="actionLimites_Org_o_de_Imprensa"/>
+   </widget>
    <addaction name="menuAdicionar"/>
+   <addaction name="menuAlterar"/>
    <addaction name="menuBuscar"/>
    <addaction name="menuSobre"/>
   </widget>
