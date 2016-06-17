@@ -22,7 +22,6 @@ def select(tabela, attr=None):
     try:
         #executa o sql
         cur.execute(cmd)
-        conn.commit()
         ret = cur.fetchall()
     except(Exception):
         showdialog("Erro ao consultar",
@@ -51,6 +50,48 @@ def insert(tabela, kwargs):
     cmd += attr + ') VALUES('
     cmd += values + ');'
     print(cmd)
+    try:
+        cur.execute(cmd)
+        conn.commit()
+        ret = True
+    except(Exception):
+        showdialog("Erro ao inserir",
+                   "Verifique os campos e tente novamente")
+        ret = False
+    cur.close()
+    conn.close()
+    return ret
+
+
+def executa_select(cmd):
+    try:
+        conn = psycopg2.connect("dbname=BD user=lucas")
+        cur = conn.cursor()
+    except(Exception):
+        showdialog("Erro no banco",
+                   "Problema ao conectar no banco de dados")
+        return []
+    try:
+        # executa o sql
+        cur.execute(cmd)
+        ret = cur.fetchall()
+    except(Exception):
+        showdialog("Erro ao consultar",
+                   "Verifique a conexão")
+        ret = []
+    cur.close()
+    conn.close()
+    return ret
+
+
+def executa_cmd(cmd):
+    try:
+        conn = psycopg2.connect("dbname=BD user=lucas")
+        cur = conn.cursor()
+    except(Exception):
+        showdialog("Erro no banco",
+                   "Problema ao conectar no banco de dados")
+        return False
     try:
         cur.execute(cmd)
         conn.commit()
