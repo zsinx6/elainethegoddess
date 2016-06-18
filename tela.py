@@ -14,6 +14,7 @@ import addcomite_tela
 import addoi_tela
 import addcred_tela
 import editlimitescomite_tela
+import editlimitesoi_tela
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -38,6 +39,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 connect(lambda: self.add_widget('cred'))
         self.ui.actionLimites_Comite.triggered.\
                 connect(lambda: self.add_widget('limitescomite'))
+        self.ui.actionLimites_Org_o_de_Imprensa.triggered.\
+                connect(lambda: self.add_widget('limitesoi'))
 
     def add_widget(self, tipo):
         try:
@@ -60,6 +63,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.widget = addcred_tela.add_credencial(self.dw.widget())
         elif(tipo == 'limitescomite'):
             self.widget = editlimitescomite_tela.edit_limitescomite(self.dw.widget())
+        elif(tipo == 'limitesoi'):
+            self.widget = editlimitesoi_tela.edit_limitesoi(self.dw.widget())
         self.dw.setWidget(self.widget)
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.dw)
 
