@@ -38,6 +38,7 @@
      <string>Buscar</string>
     </property>
     <addaction name="actionOrg_os_de_Imprensa"/>
+    <addaction name="actionProfissionais_de_Imprensa"/>
    </widget>
    <widget class="QMenu" name="menuSobre">
     <property name="title">
@@ -105,6 +106,11 @@
   <action name="actionOrg_os_de_Imprensa">
    <property name="text">
     <string>Orgãos de Imprensa</string>
+   </property>
+  </action>
+  <action name="actionProfissionais_de_Imprensa">
+   <property name="text">
+    <string>Profissionais de Imprensa</string>
    </property>
   </action>
  </widget>

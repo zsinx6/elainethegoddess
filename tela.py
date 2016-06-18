@@ -16,6 +16,7 @@ import addcred_tela
 import editlimitescomite_tela
 import editlimitesoi_tela
 import buscaoi1_tela
+import buscapi_tela
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -43,13 +44,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionLimites_Org_o_de_Imprensa.triggered.\
                 connect(lambda: self.add_widget('limitesoi'))
         self.ui.actionOrg_os_de_Imprensa.triggered.\
-                connect(lambda: self.add_widget('buscaoi1'))
+                connect(lambda: self.add_widget('buscaoi'))
+        self.ui.actionProfissionais_de_Imprensa.triggered.\
+                connect(lambda: self.add_widget('buscapi'))
 
     def add_widget(self, tipo):
-        try:
-            self.dw.hide()
-        except(Exception):
-            pass
+        for item in self.children():
+            if isinstance(item, QtWidgets.QDockWidget):
+                item.hide()
         self.dw = QtWidgets.QDockWidget(self)
         self.dw.setMinimumWidth(400)
         self.dw.setFeatures(QtWidgets.QDockWidget.DockWidgetClosable)
@@ -68,8 +70,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.widget = editlimitescomite_tela.edit_limitescomite(self.dw.widget())
         elif(tipo == 'limitesoi'):
             self.widget = editlimitesoi_tela.edit_limitesoi(self.dw.widget())
-        elif(tipo == 'buscaoi1'):
+        elif(tipo == 'buscaoi'):
             self.widget = buscaoi1_tela.busca_oi1(self.dw.widget())
+        elif(tipo == 'buscapi'):
+            self.widget = buscapi_tela.busca_pi(self.dw.widget())
         self.dw.setWidget(self.widget)
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.dw)
 
