@@ -97,8 +97,8 @@ def executa_cmd(cmd):
         conn.commit()
         ret = True
     except(Exception):
-        showdialog("Erro ao inserir",
-                   "Verifique os campos e tente novamente")
+        showdialog("Erro ao alterar",
+                   "Verifique se o comite possui quantidade suficiente de credencias")
         ret = False
     cur.close()
     conn.close()

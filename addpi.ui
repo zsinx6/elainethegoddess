@@ -80,16 +80,16 @@
    <item row="3" column="0">
     <widget class="QLineEdit" name="qlinecpf">
      <property name="inputMask">
-      <string>000.000.000-00</string>
+      <string>00000000000</string>
      </property>
      <property name="text">
-      <string>..-</string>
+      <string/>
      </property>
      <property name="maxLength">
-      <number>14</number>
+      <number>11</number>
      </property>
      <property name="placeholderText">
-      <string>CPF</string>
+      <string/>
      </property>
     </widget>
    </item>

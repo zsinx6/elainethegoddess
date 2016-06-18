@@ -8,7 +8,7 @@ from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 
 from addpi import Ui_Form
-from bdconn import insert, select, showdialog
+from bdconn import insert, select, showdialog, executa_select
 
 
 class add_pi(QtWidgets.QWidget):
@@ -51,16 +51,34 @@ class add_pi(QtWidgets.QWidget):
         oi = self.ui.qcomboboxoi.currentText()
         cred = self.ui.qcomboboxcred.currentText()
         if nome and data and func and email and nacio:
+            cmd = "SELECT codigo FROM credencial "
+            cmd += "WHERE tipo = '" + cred + "' AND "
+            cmd += "codigo NOT IN (SELECT credencial "
+            cmd += "FROM profissional_imprensa);"
+            id_cred = executa_select(cmd)
+            if not id_cred:
+                showdialog("Erro",
+                           "Nenhuma credencial livre do Tipo: " + cred +
+                           " para o Orgão de Imprensa: " + oi + "!")
+            else:
+                cred = id_cred[0][0]
+                cmd = "SELECT id from orgao_imprensa "
+                cmd += "WHERE nome = '" + oi + "';"
+                id_oi = executa_select(cmd)[0][0]
                 kwargs = {'nome': "'" + nome + "'",
                           'email': "'" + email + "'",
                           'data_nascimento': "'" + data + "'",
                           'funcao': "'" + func + "'",
                           'nacionalidade': "'" + nacio + "'",
+                          'orgao_imprensa': str(id_oi),
+                          'credencial': str(cred),
                           }
                 if passaporte:
                     kwargs['passaporte'] = "'" + passaporte + "'"
                 if cpf:
                     kwargs['cpf'] = "'" + cpf + "'"
+                if insert('profissional_imprensa', kwargs):
+                    self.parent().hide()
         else:
             showdialog("Erro", """Todos os campos
                        devem ser preenchidos!""")

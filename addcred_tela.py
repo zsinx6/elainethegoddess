@@ -7,7 +7,7 @@ import sys
 from PyQt5 import QtWidgets
 
 from addcred import Ui_Form
-from bdconn import insert, select
+from bdconn import insert, select, executa_select
 
 
 class add_credencial(QtWidgets.QWidget):
@@ -17,7 +17,7 @@ class add_credencial(QtWidgets.QWidget):
         self.ui.setupUi(self)
 
         #busca do banco de dados os ids de todos orgaos de imprensa
-        oi = select('orgao_imprensa', ['id'])
+        oi = select('orgao_imprensa', ['nome'])
         self.eval_comboboxoi(oi)
 
         #seleciona a sigla de todos os tipos de credencial
@@ -45,8 +45,11 @@ class add_credencial(QtWidgets.QWidget):
         """
         tipo = self.ui.qcombotipo.currentText()
         oi = self.ui.qcombooi.currentText()
+        cmd = "SELECT id FROM orgao_imprensa "
+        cmd += "WHERE nome = '" + oi + "';"
+        oi = executa_select(cmd)[0][0]
         kwargs = {'tipo': "'" + tipo + "'",
-                  'orgao_imprensa': oi}
+                  'orgao_imprensa': str(oi)}
         if(insert('credencial', kwargs)):
             self.parent().hide()
 
