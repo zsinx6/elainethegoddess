@@ -23,6 +23,12 @@
    </item>
    <item row="1" column="0">
     <widget class="QTableWidget" name="qlimites">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>200</height>
+      </size>
+     </property>
      <column>
       <property name="text">
        <string>Tipo</string>
@@ -44,6 +50,12 @@
    </item>
    <item row="3" column="0">
     <widget class="QTableWidget" name="qpi">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>200</height>
+      </size>
+     </property>
      <column>
       <property name="text">
        <string>Credencial</string>
