@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>438</width>
-    <height>231</height>
+    <width>348</width>
+    <height>319</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,8 +21,15 @@
      </property>
     </widget>
    </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Email</string>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="0">
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="qlinenome">
      <property name="toolTip">
       <string>Nome</string>
      </property>
@@ -33,13 +40,26 @@
       <string/>
      </property>
      <property name="maxLength">
-      <number>50</number>
+      <number>70</number>
      </property>
      <property name="frame">
       <bool>true</bool>
      </property>
      <property name="placeholderText">
-      <string>Nome</string>
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="qlineemail">
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>500</height>
+      </size>
+     </property>
+     <property name="maxLength">
+      <number>80</number>
      </property>
     </widget>
    </item>
@@ -50,8 +70,15 @@
      </property>
     </widget>
    </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>Passaporte</string>
+     </property>
+    </widget>
+   </item>
    <item row="3" column="0">
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="qlinecpf">
      <property name="inputMask">
       <string>000.000.000-00</string>
      </property>
@@ -66,6 +93,19 @@
      </property>
     </widget>
    </item>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="qlinepass">
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="inputMask">
+      <string>00000000</string>
+     </property>
+    </widget>
+   </item>
    <item row="4" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
@@ -73,28 +113,103 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="1">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Orgão de Imprensa</string>
+     </property>
+    </widget>
+   </item>
    <item row="5" column="0">
-    <widget class="QComboBox" name="comboBox"/>
+    <widget class="QComboBox" name="qcomboboxcred"/>
    </item>
    <item row="5" column="1">
-    <spacer name="verticalSpacer_2">
+    <widget class="QComboBox" name="qcomboboxoi">
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Data Nascimento</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Nacionalidade</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QDateEdit" name="qdate">
+     <property name="date">
+      <date>
+       <year>2016</year>
+       <month>6</month>
+       <day>17</day>
+      </date>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QLineEdit" name="qlinenacio">
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="maxLength">
+      <number>20</number>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>Função</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLineEdit" name="qlinefunc">
+     <property name="maxLength">
+      <number>30</number>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="QPushButton" name="addbutton">
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Adicionar</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>286</width>
-       <height>55</height>
+       <width>20</width>
+       <height>40</height>
       </size>
      </property>
     </spacer>
-   </item>
-   <item row="6" column="1">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>Adicionar</string>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>
