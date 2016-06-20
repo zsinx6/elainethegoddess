@@ -114,7 +114,7 @@ CREATE TABLE orgao_imprensa
 	id serial,
 	PRIMARY KEY(id),
 	FOREIGN KEY(comite) REFERENCES comite(nome) ON DELETE CASCADE,
-	UNIQUE(nome, comite)
+	UNIQUE(nome)
 );
 
 CREATE TABLE tipo_credencial
@@ -134,7 +134,7 @@ CREATE TABLE credencial
 	PRIMARY KEY(codigo),
 	FOREIGN KEY(orgao_imprensa) REFERENCES orgao_imprensa(id) ON DELETE CASCADE,
 	FOREIGN KEY (tipo) REFERENCES tipo_credencial(sigla) ON DELETE CASCADE--,
-	--CHECK(verifica_limites_oi(orgao_imprensa, tipo))
+	CHECK(verifica_limites_oi(orgao_imprensa, tipo))
 	--O CHECK garante que não será possível vincular mais credenciais de certo tipo a um OI do que é especificado na tabela limites_oi
 );
 
