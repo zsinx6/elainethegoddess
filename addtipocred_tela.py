@@ -35,6 +35,7 @@ class add_tipocred(QtWidgets.QWidget):
                       'direito_transmissao': "'" + transmissao + "'"}
             if(insert('tipo_credencial', kwargs)):
                 self.parent().hide()
+                self.parent().parent().setWindowTitle(self.parent().parent().title)
         else:
             showdialog("Erro", "Todos os campos devem ser preenchidos!")
 

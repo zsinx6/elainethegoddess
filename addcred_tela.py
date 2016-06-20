@@ -52,6 +52,7 @@ class add_credencial(QtWidgets.QWidget):
                   'orgao_imprensa': str(oi)}
         if(insert('credencial', kwargs)):
             self.parent().hide()
+            self.parent().parent().setWindowTitle(self.parent().parent().title)
 
 
 def main():

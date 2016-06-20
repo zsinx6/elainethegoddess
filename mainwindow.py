@@ -67,14 +67,14 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Janela Principal"))
         self.menuAdicionar.setTitle(_translate("MainWindow", "Adicionar"))
         self.menuBuscar.setTitle(_translate("MainWindow", "Buscar"))
         self.menuSobre.setTitle(_translate("MainWindow", "Sobre"))
         self.menuAlterar.setTitle(_translate("MainWindow", "Alterar"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
         self.actionProfissional_de_Imprensa.setText(_translate("MainWindow", "Profissional de Imprensa"))
-        self.actionTipo_Credencial.setText(_translate("MainWindow", "Tipo Credencial"))
+        self.actionTipo_Credencial.setText(_translate("MainWindow", "Tipo de Credencial"))
         self.actionComite.setText(_translate("MainWindow", "Comite"))
         self.actionOrg_o_de_Imprensa.setText(_translate("MainWindow", "Orgão de Imprensa"))
         self.actionCredencial.setText(_translate("MainWindow", "Credencial"))

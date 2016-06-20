@@ -45,13 +45,13 @@ class busca_oi1(QtWidgets.QWidget):
             como argumento kwargs
         """
         nome = self.ui.qlinenome.text()
+        cmd = "SELECT id, comite, nome FROM orgao_imprensa "
         if nome:
-            cmd = "SELECT id, comite, nome FROM orgao_imprensa "
-            cmd += "WHERE nome LIKE '%" + nome + "%'"
-            query = executa_select(cmd)
-            self.fill_table(query)
+            cmd += "WHERE UPPER(nome) LIKE '%" + nome.upper() + "%'"
         else:
-            showdialog("Erro", "O campo nome deve ser preenchido")
+            cmd += ";"
+        query = executa_select(cmd)
+        self.fill_table(query)
 
     def fill_table(self, lista):
         while self.ui.qtable.rowCount():

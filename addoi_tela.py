@@ -48,6 +48,7 @@ class add_oi(QtWidgets.QWidget):
                           'comite': "'" + comite + "'"}
                 if(insert('orgao_imprensa', kwargs)):
                     self.parent().hide()
+                    self.parent().parent().setWindowTitle(self.parent().parent().title)
         else:
             showdialog("Erro", """Todos os campos (menos País)
                        devem ser preenchidos!""")

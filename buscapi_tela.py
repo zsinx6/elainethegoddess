@@ -27,22 +27,22 @@ class busca_pi(QtWidgets.QWidget):
             como argumento kwargs
         """
         nome = self.ui.qlinenome.text()
+        cmd = "SELECT P.nome, P.funcao, O.nome, "
+        cmd += "P.credencial, C.tipo, P.email, "
+        cmd += "P.data_nascimento, P.nacionalidade, "
+        cmd += "P.passaporte, P.cpf FROM profissional_imprensa P "
+        cmd += "JOIN orgao_imprensa O ON O.id = P.orgao_imprensa "
+        cmd += "JOIN credencial C ON C.codigo = P.credencial "
         if nome:
-            cmd = "SELECT P.nome, P.funcao, O.nome, "
-            cmd += "P.credencial, C.tipo, P.email, "
-            cmd += "P.data_nascimento, P.nacionalidade, "
-            cmd += "P.passaporte, P.cpf FROM profissional_imprensa P "
-            cmd += "JOIN orgao_imprensa O ON O.id = P.orgao_imprensa "
-            cmd += "JOIN credencial C ON C.codigo = P.credencial "
-            cmd += "WHERE P.nome LIKE '%" + nome + "%';"
-            query = executa_select(cmd)
-            if not query:
-                showdialog("Alerta",
-                           "Nenhuma informação encontrada")
-            else:
-                self.fill_table(query)
+            cmd += "WHERE UPPER(P.nome) LIKE '%" + nome.upper() + "%';"
         else:
-            showdialog("Erro", "O campo nome deve ser preenchido")
+            cmd += ";"
+        query = executa_select(cmd)
+        if not query:
+            showdialog("Alerta",
+                       "Nenhuma informação encontrada")
+        else:
+            self.fill_table(query)
 
     def fill_table(self, lista):
         while self.ui.qtable.rowCount():

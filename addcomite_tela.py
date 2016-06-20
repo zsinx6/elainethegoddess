@@ -37,6 +37,7 @@ class add_comite(QtWidgets.QWidget):
                       'endereco': "'" + endereco + "'"}
             if(insert('comite', kwargs)):
                 self.parent().hide()
+                self.parent().parent().setWindowTitle(self.parent().parent().title)
         else:
             showdialog("Erro", """Todos os campos
                        devem ser preenchidos!""")

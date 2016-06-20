@@ -27,6 +27,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.connect_signals()
         self.cont = 0
+        self.title = self.windowTitle()
 
     def connect_signals(self):
         self.ui.actionProfissional_de_Imprensa.\
@@ -68,12 +69,17 @@ class MainWindow(QtWidgets.QMainWindow):
             self.widget = addcred_tela.add_credencial(self.dw.widget())
         elif(tipo == 'limitescomite'):
             self.widget = editlimitescomite_tela.edit_limitescomite(self.dw.widget())
+            self.dw.setFeatures(QtWidgets.QDockWidget.NoDockWidgetFeatures)
         elif(tipo == 'limitesoi'):
             self.widget = editlimitesoi_tela.edit_limitesoi(self.dw.widget())
+            self.dw.setFeatures(QtWidgets.QDockWidget.NoDockWidgetFeatures)
         elif(tipo == 'buscaoi'):
             self.widget = buscaoi1_tela.busca_oi1(self.dw.widget())
+            self.dw.setFeatures(QtWidgets.QDockWidget.NoDockWidgetFeatures)
         elif(tipo == 'buscapi'):
             self.widget = buscapi_tela.busca_pi(self.dw.widget())
+            self.dw.setFeatures(QtWidgets.QDockWidget.NoDockWidgetFeatures)
+        self.setWindowTitle(self.widget.windowTitle())
         self.dw.setWidget(self.widget)
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.dw)
 

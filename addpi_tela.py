@@ -79,6 +79,7 @@ class add_pi(QtWidgets.QWidget):
                     kwargs['cpf'] = "'" + cpf + "'"
                 if insert('profissional_imprensa', kwargs):
                     self.parent().hide()
+                    self.parent().parent().setWindowTitle(self.parent().parent().title)
         else:
             showdialog("Erro", """Todos os campos
                        devem ser preenchidos!""")
