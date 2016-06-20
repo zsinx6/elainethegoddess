@@ -35,7 +35,7 @@ class add_comite(QtWidgets.QWidget):
                       'nome': "'" + nome + "'",
                       'presidente': "'" + presidente + "'"}
             if email_contato:
-                kwargs'[email_contato'] = "'" + email_contato + "'"
+                kwargs['email_contato'] = "'" + email_contato + "'"
             if endereco:
                 kwargs['endereco'] =  "'" + endereco + "'"
             if(insert('comite', kwargs)):
