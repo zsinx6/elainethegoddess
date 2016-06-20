@@ -40,18 +40,20 @@ class add_oi(QtWidgets.QWidget):
         nome_representante = self.ui.qlinenomerepr.text()
         email_representante = self.ui.qlineemailrepr.text()
         comite = self.ui.qcombocomite.currentText()
-        if nome and endereco and nome_representante and email_representante and comite:
-                kwargs = {'nome': "'" + nome + "'",
-                          'endereco': "'" + endereco + "'",
-                          'nome_representante': "'" + nome_representante + "'",
-                          'email_representante': "'" + email_representante + "'",
-                          'comite': "'" + comite + "'"}
-                if(insert('orgao_imprensa', kwargs)):
-                    self.parent().hide()
-                    self.parent().parent().setWindowTitle(self.parent().parent().title)
+        if nome:
+            kwargs = {'nome': "'" + nome + "'",
+                      'comite': "'" + comite + "'"}
+            if endereco:
+                kwargs['endereco'] = "'" + endereco + "'"
+            if nome_representante:
+                kwargs['nome_representante'] = "'" + nome_representante + "'"
+            if email_representante:
+                kwargs['email_representante'] = "'" + email_representante + "'"
+            if(insert('orgao_imprensa', kwargs)):
+                self.parent().hide()
+                self.parent().parent().setWindowTitle(self.parent().parent().title)
         else:
-            showdialog("Erro", """Todos os campos (menos País)
-                       devem ser preenchidos!""")
+            showdialog('Erro', 'O campo nome é obrigatório')
 
 
 def main():

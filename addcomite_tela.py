@@ -16,6 +16,7 @@ class add_comite(QtWidgets.QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.connect_signals()
+
     def connect_signals(self):
         self.ui.addbutton.clicked.connect(self.addbutton_click)
 
@@ -29,18 +30,19 @@ class add_comite(QtWidgets.QWidget):
         presidente = self.ui.qlinepres.text()
         email_contato = self.ui.qlineemail.text()
         endereco = self.ui.qlineend.text()
-        if pais and nome and presidente and email_contato and endereco:
+        if pais and nome and presidente:
             kwargs = {'pais': "'" + pais + "'",
                       'nome': "'" + nome + "'",
-                      'presidente': "'" + presidente + "'",
-                      'email_contato': "'" + email_contato + "'",
-                      'endereco': "'" + endereco + "'"}
+                      'presidente': "'" + presidente + "'"}
+            if email_contato:
+                kwargs'[email_contato'] = "'" + email_contato + "'"
+            if endereco:
+                kwargs['endereco'] =  "'" + endereco + "'"
             if(insert('comite', kwargs)):
                 self.parent().hide()
                 self.parent().parent().setWindowTitle(self.parent().parent().title)
         else:
-            showdialog("Erro", """Todos os campos
-                       devem ser preenchidos!""")
+            showdialog('Erro', 'Os campos país, nome e presidente são obrigatórios')
 
 
 def main():

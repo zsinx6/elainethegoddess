@@ -1,6 +1,6 @@
 #! python
 # -*- coding: utf-8 -*-
-"""Add Orgão de Imprensa
+"""Add Profissional de Imprensa
 """
 
 import sys
@@ -14,13 +14,15 @@ from bdconn import insert, select, showdialog, executa_select
 class add_pi(QtWidgets.QWidget):
     def __init__(self, parent=None):
         """inicia a tela e seleciona o nome de todos os comites
-            para adicionalos em um combobox
+            para adiciona-los em um combobox
         """
         super(add_pi, self).__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         oi = select('orgao_imprensa', ['nome'])
         cred = select('tipo_credencial', ['sigla'])
+        # oi e cred são listas do retorno do select, vão ser
+        # adicionados nos combobox
         self.eval_comboboxoi(oi)
         self.eval_comboboxcred(cred)
         self.connect_signals()
@@ -41,6 +43,9 @@ class add_pi(QtWidgets.QWidget):
         self.ui.addbutton.clicked.connect(self.addbutton_click)
 
     def addbutton_click(self):
+        """adiciona o profissional de imprensa de acordo com os campos
+        preenchidos
+        """
         passaporte = self.ui.qlinepass.text()
         cpf = self.ui.qlinecpf.text()
         data = self.ui.qdate.date().toString(QtCore.Qt.ISODate)
@@ -50,7 +55,7 @@ class add_pi(QtWidgets.QWidget):
         nacio = self.ui.qlinenacio.text()
         oi = self.ui.qcomboboxoi.currentText()
         cred = self.ui.qcomboboxcred.currentText()
-        if nome and data and func and email and nacio:
+        if nome and func:
             cmd = "SELECT codigo FROM credencial "
             cmd += "WHERE tipo = '" + cred + "' AND "
             cmd += "codigo NOT IN (SELECT credencial "
@@ -66,13 +71,16 @@ class add_pi(QtWidgets.QWidget):
                 cmd += "WHERE nome = '" + oi + "';"
                 id_oi = executa_select(cmd)[0][0]
                 kwargs = {'nome': "'" + nome + "'",
-                          'email': "'" + email + "'",
-                          'data_nascimento': "'" + data + "'",
                           'funcao': "'" + func + "'",
-                          'nacionalidade': "'" + nacio + "'",
                           'orgao_imprensa': str(id_oi),
                           'credencial': str(cred),
-                          }
+                         }
+                if email:
+                    kwargs['email'] = "'" + email + "'"
+                if data:
+                    kwargs['data_nascimento'] = "'" + data + "'"
+                if nacio:
+                    kwargs['nacionalidade'] = "'" + nacio + "'"
                 if passaporte:
                     kwargs['passaporte'] = "'" + passaporte + "'"
                 if cpf:
@@ -81,8 +89,7 @@ class add_pi(QtWidgets.QWidget):
                     self.parent().hide()
                     self.parent().parent().setWindowTitle(self.parent().parent().title)
         else:
-            showdialog("Erro", """Todos os campos
-                       devem ser preenchidos!""")
+            showdialog('Erro', 'Os campos nome e função são obrigatórios')
 
 
 def main():

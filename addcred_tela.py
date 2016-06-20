@@ -7,7 +7,7 @@ import sys
 from PyQt5 import QtWidgets
 
 from addcred import Ui_Form
-from bdconn import insert, select, executa_select
+from bdconn import insert, select, executa_select, showdialog
 
 
 class add_credencial(QtWidgets.QWidget):
@@ -26,13 +26,13 @@ class add_credencial(QtWidgets.QWidget):
         self.connect_signals()
 
     def eval_comboboxoi(self, lista):
-        """adiciona lista em no combobox
+        """adiciona o retorno do select no combobox
         """
         for item in lista:
             self.ui.qcombooi.addItem(str(item[0]))
 
     def eval_comboboxtipo(self, lista):
-        """adiciona lista em combobox qcombotipo
+        """adiciona o retorno do select no combobox
         """
         for item in lista:
             self.ui.qcombotipo.addItem(str(item[0]))
@@ -47,12 +47,15 @@ class add_credencial(QtWidgets.QWidget):
         oi = self.ui.qcombooi.currentText()
         cmd = "SELECT id FROM orgao_imprensa "
         cmd += "WHERE nome = '" + oi + "';"
-        oi = executa_select(cmd)[0][0]
-        kwargs = {'tipo': "'" + tipo + "'",
-                  'orgao_imprensa': str(oi)}
-        if(insert('credencial', kwargs)):
-            self.parent().hide()
-            self.parent().parent().setWindowTitle(self.parent().parent().title)
+        if oi:
+            oi = executa_select(cmd)[0][0]
+            kwargs = {'tipo': "'" + tipo + "'",
+                      'orgao_imprensa': str(oi)}
+            if(insert('credencial', kwargs)):
+                self.parent().hide()
+                self.parent().parent().setWindowTitle(self.parent().parent().title)
+        else:
+            showdialog('Erro', 'Nenhum OI registrado')
 
 
 def main():
