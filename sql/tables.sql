@@ -38,7 +38,7 @@ CREATE TABLE credencial
 	orgao_imprensa integer NOT NULL,
 	PRIMARY KEY(codigo),
 	FOREIGN KEY(orgao_imprensa) REFERENCES orgao_imprensa(id) ON DELETE CASCADE,
-	FOREIGN KEY (tipo) REFERENCES tipo_credencial(sigla) ON DELETE CASCADE--,
+	FOREIGN KEY (tipo) REFERENCES tipo_credencial(sigla) ON DELETE CASCADE,
 	CHECK(verifica_limites_oi(orgao_imprensa, tipo))
 	--O CHECK garante que não será possível vincular mais credenciais de certo tipo a um OI do que é especificado na tabela limites_oi
 );
