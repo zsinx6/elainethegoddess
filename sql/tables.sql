@@ -2,7 +2,7 @@ CREATE TABLE comite
 (
 	pais varchar(30) DEFAULT '-' NOT NULL,	-- O traço (-) representa o Comitê Paralímpico Internacional (IPC), o qual não tem país.
 	nome varchar(50),
-	presidente varchar(70),
+	presidente varchar(70) NOT NULL,
 	email_contato varchar(80),
 	endereco varchar(80),
 	PRIMARY KEY(nome),
