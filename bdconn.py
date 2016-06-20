@@ -49,7 +49,6 @@ def insert(tabela, kwargs):
     values = ','.join(kwargs.values())
     cmd += attr + ') VALUES('
     cmd += values + ');'
-    print(cmd)
     try:
         cur.execute(cmd)
         conn.commit()

@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(400, 353)
+        Form.resize(400, 373)
         self.formLayout = QtWidgets.QFormLayout(Form)
         self.formLayout.setObjectName("formLayout")
         self.label = QtWidgets.QLabel(Form)
@@ -31,6 +31,11 @@ class Ui_Form(object):
         self.qsbutton = QtWidgets.QPushButton(Form)
         self.qsbutton.setObjectName("qsbutton")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.qsbutton)
+        spacerItem = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout.setItem(5, QtWidgets.QFormLayout.LabelRole, spacerItem)
+        self.label_3 = QtWidgets.QLabel(Form)
+        self.label_3.setObjectName("label_3")
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.label_3)
         self.qtable = QtWidgets.QTableWidget(Form)
         self.qtable.setObjectName("qtable")
         self.qtable.setColumnCount(5)
@@ -46,7 +51,7 @@ class Ui_Form(object):
         item = QtWidgets.QTableWidgetItem()
         self.qtable.setHorizontalHeaderItem(4, item)
         self.qtable.horizontalHeader().setDefaultSectionSize(120)
-        self.formLayout.setWidget(5, QtWidgets.QFormLayout.SpanningRole, self.qtable)
+        self.formLayout.setWidget(7, QtWidgets.QFormLayout.SpanningRole, self.qtable)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -57,6 +62,7 @@ class Ui_Form(object):
         self.label.setText(_translate("Form", "Nome"))
         self.label_2.setText(_translate("Form", "País"))
         self.qsbutton.setText(_translate("Form", "Buscar"))
+        self.label_3.setText(_translate("Form", "Comitês"))
         item = self.qtable.horizontalHeaderItem(0)
         item.setText(_translate("Form", "País"))
         item = self.qtable.horizontalHeaderItem(1)

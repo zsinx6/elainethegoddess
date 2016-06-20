@@ -9,7 +9,7 @@ from PyQt5 import QtCore
 
 from buscacomite import Ui_Form
 from bdconn import insert, showdialog, executa_select, executa_cmd
-
+import buscacomite2_tela
 
 class busca_comite(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -20,6 +20,22 @@ class busca_comite(QtWidgets.QWidget):
 
     def connect_signals(self):
         self.ui.qsbutton.clicked.connect(self.addbutton_click)
+        self.ui.qtable.doubleClicked.connect(self.item_click)
+
+    def item_click(self):
+        row = self.ui.qtable.currentRow()
+        item = self.ui.qtable.item(row, 1)
+        nome_comite = item.text()
+        try:
+            self.dw.hide()
+        except(Exception):
+            pass
+        self.dw = QtWidgets.QDockWidget(self.parent())
+        self.dw.setMinimumWidth(400)
+        self.dw.setFeatures(QtWidgets.QDockWidget.DockWidgetClosable)
+        self.widget = buscacomite2_tela.busca_comite2(nome_comite, self.dw.widget())
+        self.dw.setWidget(self.widget)
+        self.parent().parent().addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.dw)
 
     def addbutton_click(self):
         """ manipulador do evento click do mouse para adicionar comite
