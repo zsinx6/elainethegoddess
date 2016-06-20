@@ -17,6 +17,7 @@ import editlimitescomite_tela
 import editlimitesoi_tela
 import buscaoi1_tela
 import buscapi_tela
+import buscacomite_tela
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -48,6 +49,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 connect(lambda: self.add_widget('buscaoi'))
         self.ui.actionProfissionais_de_Imprensa.triggered.\
                 connect(lambda: self.add_widget('buscapi'))
+        self.ui.actionComit.triggered.\
+                connect(lambda: self.add_widget('buscacomite'))
 
     def add_widget(self, tipo):
         for item in self.children():
@@ -78,6 +81,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.dw.setFeatures(QtWidgets.QDockWidget.NoDockWidgetFeatures)
         elif(tipo == 'buscapi'):
             self.widget = buscapi_tela.busca_pi(self.dw.widget())
+            self.dw.setFeatures(QtWidgets.QDockWidget.NoDockWidgetFeatures)
+        elif(tipo == 'buscacomite'):
+            self.widget = buscacomite_tela.busca_comite(self.dw.widget())
             self.dw.setFeatures(QtWidgets.QDockWidget.NoDockWidgetFeatures)
         self.setWindowTitle(self.widget.windowTitle())
         self.dw.setWidget(self.widget)

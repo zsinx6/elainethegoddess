@@ -39,6 +39,7 @@
     </property>
     <addaction name="actionOrg_os_de_Imprensa"/>
     <addaction name="actionProfissionais_de_Imprensa"/>
+    <addaction name="actionComit"/>
    </widget>
    <widget class="QMenu" name="menuSobre">
     <property name="title">
@@ -111,6 +112,11 @@
   <action name="actionProfissionais_de_Imprensa">
    <property name="text">
     <string>Profissionais de Imprensa</string>
+   </property>
+  </action>
+  <action name="actionComit">
+   <property name="text">
+    <string>Comitê</string>
    </property>
   </action>
  </widget>

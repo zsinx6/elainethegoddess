@@ -48,6 +48,8 @@ class Ui_MainWindow(object):
         self.actionOrg_os_de_Imprensa.setObjectName("actionOrg_os_de_Imprensa")
         self.actionProfissionais_de_Imprensa = QtWidgets.QAction(MainWindow)
         self.actionProfissionais_de_Imprensa.setObjectName("actionProfissionais_de_Imprensa")
+        self.actionComit = QtWidgets.QAction(MainWindow)
+        self.actionComit.setObjectName("actionComit")
         self.menuAdicionar.addAction(self.actionProfissional_de_Imprensa)
         self.menuAdicionar.addAction(self.actionTipo_Credencial)
         self.menuAdicionar.addAction(self.actionComite)
@@ -55,6 +57,7 @@ class Ui_MainWindow(object):
         self.menuAdicionar.addAction(self.actionCredencial)
         self.menuBuscar.addAction(self.actionOrg_os_de_Imprensa)
         self.menuBuscar.addAction(self.actionProfissionais_de_Imprensa)
+        self.menuBuscar.addAction(self.actionComit)
         self.menuAlterar.addAction(self.actionLimites_Comite)
         self.menuAlterar.addAction(self.actionLimites_Org_o_de_Imprensa)
         self.menubar.addAction(self.menuAdicionar.menuAction())
@@ -82,4 +85,5 @@ class Ui_MainWindow(object):
         self.actionLimites_Org_o_de_Imprensa.setText(_translate("MainWindow", "Limites Orgão de Imprensa"))
         self.actionOrg_os_de_Imprensa.setText(_translate("MainWindow", "Orgãos de Imprensa"))
         self.actionProfissionais_de_Imprensa.setText(_translate("MainWindow", "Profissionais de Imprensa"))
+        self.actionComit.setText(_translate("MainWindow", "Comitê"))
 
