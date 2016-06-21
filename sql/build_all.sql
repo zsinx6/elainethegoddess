@@ -1,23 +1,9 @@
-
---Drops usados para teste
-drop table comite cascade;
-drop table orgao_imprensa cascade;
-drop table tipo_credencial cascade;
-drop table credencial cascade;
-drop table profissional_imprensa cascade;
-drop table limites_comite cascade;
-drop table limites_oi cascade;
-drop function verifica_limites_comite(integer, character varying, integer) CASCADE;
-drop function verifica_limites_oi(integer, character varying) CASCADE;
-
-
-
---Criação dos procedures usados nos CHECKs da tabela credencial e limites_oi
-
+-- Procedures para checks (procedures.sql)
 
 -- Ao ser alocada certa quantidade de credenciais de certo tipo para certo órgão de imprensa via tabela limites_oi,
 -- é preciso verificar se o total de alocações de credenciais daquele tipo não excede o total disponível para o comitê
 -- (determinado na tabela limites_comite).
+
 CREATE OR REPLACE FUNCTION verifica_limites_comite (orgao_id integer, tipo_cred varchar(4), qtd integer) RETURNS boolean AS $$
 DECLARE
 	alocado integer;
@@ -59,6 +45,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 -- Para uma nova credencial de certo tipo ser criada e associada a certo órgão de imprensa, é preciso verificar se 
 -- o comitê ao qual o OI está associado ainda tem credenciais disponíveis que sejam daquele tipo e estejam alocadas ao OI em questão.
 -- Em outras palavras, é preciso verificar se o OI já não atingiu o limite de credenciais do tipo em questão que está especificado
@@ -90,14 +77,13 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-
---Criação das tabelas do schema
+--Criação as tabelas (tables.sql)
 
 CREATE TABLE comite
 (
 	pais varchar(30) DEFAULT '-' NOT NULL,	-- O traço (-) representa o Comitê Paralímpico Internacional (IPC), o qual não tem país.
 	nome varchar(50),
-	presidente varchar(70),
+	presidente varchar(70) NOT NULL,
 	email_contato varchar(80),
 	endereco varchar(80),
 	PRIMARY KEY(nome),
@@ -178,9 +164,7 @@ CREATE TABLE limites_oi
 );
 
 
-
---Criação dos triggers responsáveis pela realização das devidas inserções nas tabelas limites_comite e limites_oi na criação de um novo comitê, OI, ou tipo de credencial
-
+--Criação de triggers para inserções automáticas (triggers.sql)
 
 -- Quando um comitê é inserido, a tabela limites_comite (que para cada par comite, tipo_de_credencial associa
 -- o número de credenciais daquele tipo disponíveis para o comitê) precisa ser atualizada para guardar os limites do novo comitê.
@@ -201,6 +185,7 @@ CREATE TRIGGER comite_trigger AFTER INSERT ON comite
 FOR EACH ROW EXECUTE PROCEDURE inserir_limites_comite();
 
 
+
 -- Análogo acima vale quando um novo orgão de imprensa é adicionado: quando um novo OI é criado, para cada tipo de credencial existente, um novo registro
 -- em limites_oi precisa ser criado.
 CREATE OR REPLACE FUNCTION inserir_limites_oi() RETURNS TRIGGER AS $$
@@ -216,6 +201,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER oi_trigger AFTER INSERT ON orgao_imprensa
 FOR EACH ROW EXECUTE PROCEDURE inserir_limites_oi();
+
 
 
 -- Quando um novo tipo de credencial é adicionado, ambas as tabelas limites_comite
