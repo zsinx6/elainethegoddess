@@ -1,6 +1,8 @@
 #! python
 # -*- coding: utf-8 -*-
 """Add Tipo Crecencial
+Adiciona novo tipo de credencial
+Precisa ser informado a sigla do tipo de credencial, a funcao e se possui direito de transmissao
 """
 
 import sys
@@ -29,10 +31,14 @@ class add_tipocred(QtWidgets.QWidget):
         else:
             transmissao = 'n'
 
+        """verifica se os dados foram informados
+        """
         if sigla and funcao:
             kwargs = {'sigla': "'" + sigla + "'",
                       'funcao': "'" + funcao + "'",
                       'direito_transmissao': "'" + transmissao + "'"}
+
+            #insere o novo tipo de credencial
             if(insert('tipo_credencial', kwargs)):
                 self.parent().hide()
                 self.parent().parent().setWindowTitle(self.parent().parent().title)

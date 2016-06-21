@@ -20,9 +20,15 @@ class add_pi(QtWidgets.QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         oi = select('orgao_imprensa', ['nome'])
+
+        """verifica se o OI especificado realmente existe
+        """
         if not oi:
             showdialog('Erro', 'Não existem OIs registrados')
         cred = select('tipo_credencial', ['sigla'])
+
+        """verifica se a credencial esta cadastrada
+        """
         if not cred:
             showdialog('Erro', 'Não existem Tipos de Credenciais registrados')
         if not cred or not oi:
@@ -74,6 +80,9 @@ class add_pi(QtWidgets.QWidget):
                 cmd += "codigo NOT IN (SELECT credencial "
                 cmd += "FROM profissional_imprensa);"
                 id_cred = executa_select(cmd)
+
+                """verifica se a credencial ainda nao esta sendo usada
+                """
                 if not id_cred:
                     showdialog("Erro",
                                "Nenhuma credencial livre do Tipo: " + cred +
@@ -88,6 +97,9 @@ class add_pi(QtWidgets.QWidget):
                               'orgao_imprensa': str(id_oi),
                               'credencial': str(cred),
                              }
+
+                    """constroi o insert
+                    """
                     if email:
                         kwargs['email'] = "'" + email + "'"
                     if data:

@@ -43,6 +43,9 @@ class add_oi(QtWidgets.QWidget):
         nome_representante = self.ui.qlinenomerepr.text()
         email_representante = self.ui.qlineemailrepr.text()
         comite = self.ui.qcombocomite.currentText()
+
+        """verifica se campo nome foi preenchido
+        """
         if nome:
             kwargs = {'nome': "'" + nome + "'",
                       'comite': "'" + comite + "'"}
