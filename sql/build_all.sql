@@ -214,3 +214,6 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER tipo_trigger AFTER INSERT ON tipo_credencial
 FOR EACH ROW EXECUTE PROCEDURE inserir_limites_tipo();
+
+--Inserção do Comitê Paralímpico Internacional é feita de antemão:
+INSERT INTO comite(pais, nome, presidente, email_contato, endereco) VALUES (default, 'International Paralympic Comittee', 'Sir Philip Craven', ' info@paralympic.org', 'Adenauerallee 212-214, 53113 Bonn, Germany');
