@@ -20,19 +20,19 @@ class edit_limitesoi(QtWidgets.QWidget):
         oi = select('orgao_imprensa', ['nome'])
         if not oi:
             showdialog('Alerta', 'Nenhum OI cadastrado')
-            self.parent().hide()
-            self.parent().parent().setWindowTitle(self.parent().parent().title)
-            return
         tipos = select('tipo_credencial', ['sigla'])
         if not tipos:
             showdialog('Alerta', 'Nenhum Tipo de Credencial cadastrada')
-            self.parent().hide()
-            self.parent().parent().setWindowTitle(self.parent().parent().title)
+        if not tipos or not oi:
             return
         cmd = "SELECT quantidade from limites_oi JOIN orgao_imprensa "
         cmd += "ON orgao_imprensa = id WHERE nome = '" + oi[0][0] + "' "
         cmd += "AND tipo_credencial = '" + tipos[0][0] + "';"
         qtd = executa_select(cmd)[0][0]
+        if qtd:
+            self.oldqtd = qtd
+        else:
+            self.oldqtd = 0
         self.ui.qspinboxqtd.setValue(qtd)
         self.eval_comcoboxtipo(tipos)
         self.eval_comcoboxoi(oi)
@@ -58,7 +58,11 @@ class edit_limitesoi(QtWidgets.QWidget):
         cmd += "WHERE tipo_credencial = '" + tipo + "' "
         cmd += "AND orgao_imprensa IN (SELECT id FROM orgao_imprensa "
         cmd += "WHERE nome = '" + oi + "');"
-        executa_cmd(cmd)
+        if not executa_cmd(cmd):
+            showdialog('Alerta', 'Verificar se o Comite possui Limite de Credenciais')
+            self.ui.qspinboxqtd.setValue(self.oldqtd)
+        else:
+            self.oldqtd = qtd
 
     def changes(self):
         oi = self.ui.qcomboboxoi.currentText()
@@ -70,8 +74,7 @@ class edit_limitesoi(QtWidgets.QWidget):
             qtd = executa_select(cmd)[0][0]
             self.ui.qspinboxqtd.setValue(qtd)
         except(Exception):
-            showdialog('Erro', 'Verifique a conexão do banco de dados')
-
+            pass
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

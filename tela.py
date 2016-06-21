@@ -12,7 +12,6 @@ import addpi_tela
 import addtipocred_tela
 import addcomite_tela
 import addoi_tela
-import addcred_tela
 import editlimitescomite_tela
 import editlimitesoi_tela
 import buscaoi1_tela
@@ -39,8 +38,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 connect(lambda: self.add_widget('comite'))
         self.ui.actionOrg_o_de_Imprensa.triggered.\
                 connect(lambda: self.add_widget('oi'))
-        self.ui.actionCredencial.triggered.\
-                connect(lambda: self.add_widget('cred'))
         self.ui.actionLimites_Comite.triggered.\
                 connect(lambda: self.add_widget('limitescomite'))
         self.ui.actionLimites_Org_o_de_Imprensa.triggered.\
@@ -68,8 +65,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.widget = addcomite_tela.add_comite(self.dw.widget())
         elif(tipo == 'oi'):
             self.widget = addoi_tela.add_oi(self.dw.widget())
-        elif(tipo == 'cred'):
-            self.widget = addcred_tela.add_credencial(self.dw.widget())
         elif(tipo == 'limitescomite'):
             self.widget = editlimitescomite_tela.edit_limitescomite(self.dw.widget())
             self.dw.setFeatures(QtWidgets.QDockWidget.NoDockWidgetFeatures)

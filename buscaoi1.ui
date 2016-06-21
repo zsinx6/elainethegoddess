@@ -28,21 +28,14 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="QPushButton" name="qsbutton">
-     <property name="text">
-      <string>Buscar</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
+   <item row="3" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Orgãos de Imprensa</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="0" colspan="2">
+   <item row="5" column="0" colspan="2">
     <widget class="QTableWidget" name="qtable">
      <column>
       <property name="text">
@@ -59,6 +52,13 @@
        <string>Nome</string>
       </property>
      </column>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="qsbutton">
+     <property name="text">
+      <string>Buscar</string>
+     </property>
     </widget>
    </item>
   </layout>
