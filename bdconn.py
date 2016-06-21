@@ -12,7 +12,7 @@ def select(tabela, attr=None):
     except(Exception):
         showdialog("Erro no banco",
                    "Problema ao conectar no banco de dados")
-        return []
+        exit()
     if not attr:
         attr = '*'
     else:
@@ -43,7 +43,7 @@ def insert(tabela, kwargs):
     except(Exception):
         showdialog("Erro no banco",
                    "Problema ao conectar no banco de dados")
-        return False
+        exit()
     cmd = 'INSERT INTO ' + tabela + ' ('
     attr = ','.join(kwargs.keys())
     values = ','.join(kwargs.values())
@@ -54,8 +54,6 @@ def insert(tabela, kwargs):
         conn.commit()
         ret = True
     except(Exception):
-        showdialog("Erro ao inserir",
-                   "Verifique os campos e tente novamente")
         ret = False
     cur.close()
     conn.close()
@@ -69,7 +67,7 @@ def executa_select(cmd):
     except(Exception):
         showdialog("Erro no banco",
                    "Problema ao conectar no banco de dados")
-        return []
+        exit()
     try:
         # executa o sql
         cur.execute(cmd)
@@ -90,14 +88,12 @@ def executa_cmd(cmd):
     except(Exception):
         showdialog("Erro no banco",
                    "Problema ao conectar no banco de dados")
-        return False
+        exit()
     try:
         cur.execute(cmd)
         conn.commit()
         ret = True
     except(Exception):
-        showdialog("Erro ao alterar",
-                   "Verifique se o comite possui quantidade suficiente de credencias")
         ret = False
     cur.close()
     conn.close()

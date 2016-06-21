@@ -20,14 +20,10 @@ class edit_limitescomite(QtWidgets.QWidget):
         comites = select('comite', ['nome'])
         if not comites:
             showdialog('Alerta', 'Nenhum Comitê cadastrado')
-            self.parent().hide()
-            self.parent().parent().setWindowTitle(self.parent().parent().title)
-            return
         tipos = select('tipo_credencial', ['sigla'])
         if not tipos:
             showdialog('Alerta', 'Nenhum Tipo de Credencial cadastrado')
-            self.parent().hide()
-            self.parent().parent().setWindowTitle(self.parent().parent().title)
+        if not tipos or not comites:
             return
         cmd = "SELECT quantidade FROM limites_comite WHERE comite = '" + comites[0][0] + """' AND
         tipo_credencial = '""" + tipos[0][0] + "';"
@@ -67,8 +63,7 @@ class edit_limitescomite(QtWidgets.QWidget):
             qtd = executa_select(cmd)[0][0]
             self.ui.qspinboxqtd.setValue(qtd)
         except(Exception):
-            showdialog('Erro', 'Verifique a conexão com o banco de dados')
-
+            pass
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

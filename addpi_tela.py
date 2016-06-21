@@ -22,14 +22,10 @@ class add_pi(QtWidgets.QWidget):
         oi = select('orgao_imprensa', ['nome'])
         if not oi:
             showdialog('Erro', 'Não existem OIs registrados')
-            self.parent().hide()
-            self.parent().parent().setWindowTitle(self.parent().parent().title)
-            return
         cred = select('tipo_credencial', ['sigla'])
         if not cred:
-            showdialog('Erro', 'Não existem tipos de credenciais registrados')
-            self.parent().hide()
-            self.parent().parent().setWindowTitle(self.parent().parent().title)
+            showdialog('Erro', 'Não existem Tipos de Credenciais registrados')
+        if not cred or not oi:
             return
         # oi e cred são listas do retorno do select, vão ser
         # adicionados nos combobox

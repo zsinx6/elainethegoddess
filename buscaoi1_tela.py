@@ -51,6 +51,8 @@ class busca_oi1(QtWidgets.QWidget):
         else:
             cmd += ";"
         query = executa_select(cmd)
+        if not query:
+            showdialog('Alerta', 'Nenhuma informação encontrada')
         self.fill_table(query)
 
     def fill_table(self, lista):
