@@ -18,7 +18,17 @@ class edit_limitesoi(QtWidgets.QWidget):
         self.connect_signals()
         self.ui.qspinboxqtd.setMaximum(9999999)
         oi = select('orgao_imprensa', ['nome'])
+        if not oi:
+            showdialog('Alerta', 'Nenhum OI cadastrado')
+            self.parent().hide()
+            self.parent().parent().setWindowTitle(self.parent().parent().title)
+            return
         tipos = select('tipo_credencial', ['sigla'])
+        if not tipos:
+            showdialog('Alerta', 'Nenhum Tipo de Credencial cadastrada')
+            self.parent().hide()
+            self.parent().parent().setWindowTitle(self.parent().parent().title)
+            return
         cmd = "SELECT quantidade from limites_oi JOIN orgao_imprensa "
         cmd += "ON orgao_imprensa = id WHERE nome = '" + oi[0][0] + "' "
         cmd += "AND tipo_credencial = '" + tipos[0][0] + "';"
@@ -60,7 +70,7 @@ class edit_limitesoi(QtWidgets.QWidget):
             qtd = executa_select(cmd)[0][0]
             self.ui.qspinboxqtd.setValue(qtd)
         except(Exception):
-            pass
+            showdialog('Erro', 'Verifique a conexão do banco de dados')
 
 
 def main():

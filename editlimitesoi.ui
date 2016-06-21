@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Editar Quantidades Credencias do OI</string>
+   <string>Editar Quantidades Credenciais do OI</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="2" column="0">

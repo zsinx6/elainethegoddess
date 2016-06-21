@@ -19,6 +19,11 @@ class add_oi(QtWidgets.QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         comite = select('comite', ['nome'])
+        if not comite:
+            showdialog('Alerta', 'Nenhum Comitê cadastrado')
+            self.parent().hide()
+            self.parent().parent().setWindowTitle(self.parent().parent().t    itle)
+            return
         self.eval_combobox(comite)
         self.connect_signals()
 

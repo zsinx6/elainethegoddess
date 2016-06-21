@@ -44,7 +44,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Editar Quantidades Credencias do OI"))
+        Form.setWindowTitle(_translate("Form", "Editar Quantidades Credenciais do OI"))
         self.label_2.setText(_translate("Form", "Orgão de Imprensa"))
         self.label_3.setText(_translate("Form", "Quantidade"))
         self.label.setText(_translate("Form", "Tipo Credencial"))
