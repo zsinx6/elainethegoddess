@@ -1,4 +1,4 @@
---Popula o banco de dados
+-- Popula o banco de dados. De preferência rodar com o banco de dados vazio.
 
 INSERT INTO comite values ('Brazil', 'Comite Paraolimpico Brasileiro', 'Rodrigo Weigert', 'brazil@brazil.com', 'rua do comite, 222, Rio de Janeiro/RJ');
 

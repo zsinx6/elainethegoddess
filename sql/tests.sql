@@ -1,3 +1,6 @@
+-- Alguns testes do banco de dados. De preferência rodar com o banco de dados vazio.
+-- Note que algumas inserções falham de propósito - são testes de CHECKs de tabelas
+
 insert into tipo_credencial(sigla, funcao, direito_transmissao) values ('Ep', 'Fotógrafo jornalístico', 'N');
 insert into tipo_credencial(sigla, funcao, direito_transmissao) values ('Ec', 'Cameraman', 'S');
 
