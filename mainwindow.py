@@ -54,7 +54,6 @@ class Ui_MainWindow(object):
         self.menuAdicionar.addAction(self.actionTipo_Credencial)
         self.menuAdicionar.addAction(self.actionComite)
         self.menuAdicionar.addAction(self.actionOrg_o_de_Imprensa)
-        self.menuAdicionar.addAction(self.actionCredencial)
         self.menuBuscar.addAction(self.actionOrg_os_de_Imprensa)
         self.menuBuscar.addAction(self.actionProfissionais_de_Imprensa)
         self.menuBuscar.addAction(self.actionComit)

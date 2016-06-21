@@ -19,7 +19,7 @@ class edit_limitescomite(QtWidgets.QWidget):
         self.ui.qspinboxqtd.setMaximum(9999999)
         comites = select('comite', ['nome'])
         tipos = select('tipo_credencial', ['sigla'])
-        cmd = "SELECT quantidade from limites_comite where comite = '" + comites[0][0] + """' AND
+        cmd = "SELECT quantidade FROM limites_comite WHERE comite = '" + comites[0][0] + """' AND
         tipo_credencial = '""" + tipos[0][0] + "';"
         qtd = executa_select(cmd)[0][0]
         self.ui.qspinboxqtd.setValue(qtd)
@@ -43,15 +43,15 @@ class edit_limitescomite(QtWidgets.QWidget):
         comite = self.ui.qcomboboxcomite.currentText()
         tipo = self.ui.qcomboboxtipocred.currentText()
         qtd = self.ui.qspinboxqtd.value()
-        cmd = "UPDATE limites_comite set quantidade = " + str(qtd)
-        cmd += " where comite = '" + comite + "' "
+        cmd = "UPDATE limites_comite SET quantidade = " + str(qtd)
+        cmd += " WHERE comite = '" + comite + "' "
         cmd += "AND tipo_credencial ='" + tipo + "';"
         executa_cmd(cmd)
 
     def changes(self):
         comite = self.ui.qcomboboxcomite.currentText()
         tipo = self.ui.qcomboboxtipocred.currentText()
-        cmd = "SELECT quantidade from limites_comite where comite = '" + comite + """' AND
+        cmd = "SELECT quantidade FROM limites_comite WHERE comite = '" + comite + """' AND
         tipo_credencial = '""" + tipo + "'"
         try:
             qtd = executa_select(cmd)[0][0]

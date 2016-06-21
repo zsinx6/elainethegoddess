@@ -31,7 +31,6 @@
     <addaction name="actionTipo_Credencial"/>
     <addaction name="actionComite"/>
     <addaction name="actionOrg_o_de_Imprensa"/>
-    <addaction name="actionCredencial"/>
    </widget>
    <widget class="QMenu" name="menuBuscar">
     <property name="title">
