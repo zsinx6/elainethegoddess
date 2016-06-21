@@ -1,8 +1,5 @@
 #! python
 # -*- coding: utf-8 -*-
-"""Add Comite
-"""
-
 import sys
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
@@ -16,10 +13,16 @@ class busca_comite2(QtWidgets.QWidget):
         super(busca_comite2, self).__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+
+        """seleciona (tipo_credencial, qtd) pra o comite especificado
+        """
         cmd = "SELECT quantidade, tipo_credencial FROM comite "
         cmd += "join limites_comite on nome = comite "
         cmd += "WHERE comite = '" + nome_comite + "';"
         limites = executa_select(cmd)
+
+        """seleciona os OI's que detem essas credenciais do comite especificado
+        """
         cmd = "SELECT O.nome, O.id, O.nome_representante, O.email_representante, O.endereco "
         cmd += "FROM orgao_imprensa O JOIN comite C ON C.nome = O.comite "
         cmd += "WHERE O.comite = '" + nome_comite + "';"
@@ -27,6 +30,8 @@ class busca_comite2(QtWidgets.QWidget):
         self.fill_table(limites, self.ui.qtablelimites)
         self.fill_table(ois, self.ui.qtableoi)
 
+    """ preenche a tabela exibida na tela
+    """
     def fill_table(self, lista, table):
         while table.rowCount():
             table.removeRow(0)

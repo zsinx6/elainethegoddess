@@ -1,7 +1,5 @@
 #! python
 # -*- coding: utf-8 -*-
-"""Add Comite
-"""
 
 import sys
 from PyQt5 import QtWidgets
@@ -10,6 +8,9 @@ from PyQt5 import QtCore
 from buscaoi2 import Ui_Form
 from bdconn import insert, showdialog, executa_select, executa_cmd
 
+"""Busca todos os profisionais de Imprensa relacionados ao OI em questao, busca tbm sua credencial
+    Busca os limites para cada tipo de credencial relacionada ao OI em questao
+"""
 
 class busca_oi2(QtWidgets.QWidget):
     def __init__(self, id_oi, parent=None):
@@ -23,6 +24,7 @@ class busca_oi2(QtWidgets.QWidget):
         cmd = "SELECT tipo_credencial, quantidade FROM limites_oi "
         cmd += "WHERE orgao_imprensa = " + id_oi + ";"
         limites = executa_select(cmd)
+
         self.fill_table(pis, self.ui.qpi)
         self.fill_table(limites, self.ui.qlimites)
 

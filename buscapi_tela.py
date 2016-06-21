@@ -1,7 +1,5 @@
 #! python
 # -*- coding: utf-8 -*-
-"""Add Comite
-"""
 
 import sys
 from PyQt5 import QtWidgets

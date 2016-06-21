@@ -1,8 +1,5 @@
 #! python
 # -*- coding: utf-8 -*-
-"""Add Comite
-"""
-
 import sys
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
@@ -54,6 +51,8 @@ class busca_oi1(QtWidgets.QWidget):
         self.fill_table(query)
 
     def fill_table(self, lista):
+        """ recebe lista e adiciona na interface
+        """
         while self.ui.qtable.rowCount():
             self.ui.qtable.removeRow(0)
         row = 0
