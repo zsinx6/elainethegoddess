@@ -16,8 +16,7 @@ class busca_comite2(QtWidgets.QWidget):
         super(busca_comite2, self).__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        cmd = "SELECT quantidade, tipo_credencial FROM comite "
-        cmd += "join limites_comite on nome = comite "
+        cmd = "SELECT quantidade, tipo_credencial FROM limites_comite "
         cmd += "WHERE comite = '" + nome_comite + "';"
         limites = executa_select(cmd)
         cmd = "SELECT O.nome, O.id, O.nome_representante, O.email_representante, O.endereco "
