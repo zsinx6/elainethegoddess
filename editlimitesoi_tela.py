@@ -1,6 +1,6 @@
 #! python
 # -*- coding: utf-8 -*-
-"""Edit limites comite
+"""Edit limites OI 
 """
 
 import sys
@@ -18,6 +18,10 @@ class edit_limitesoi(QtWidgets.QWidget):
         self.connect_signals()
         self.ui.qspinboxqtd.setMaximum(9999999)
         oi = select('orgao_imprensa', ['nome'])
+
+
+        """verificao
+        """
         if not oi:
             showdialog('Alerta', 'Nenhum OI cadastrado')
         tipos = select('tipo_credencial', ['sigla'])
@@ -25,10 +29,15 @@ class edit_limitesoi(QtWidgets.QWidget):
             showdialog('Alerta', 'Nenhum Tipo de Credencial cadastrada')
         if not tipos or not oi:
             return
+
+        """ seleciona todas as quantidades relacionadas ao OI e Tipo de Crendenciais escolhidas pelo usuario
+        """
         cmd = "SELECT quantidade from limites_oi JOIN orgao_imprensa "
         cmd += "ON orgao_imprensa = id WHERE nome = '" + oi[0][0] + "' "
         cmd += "AND tipo_credencial = '" + tipos[0][0] + "';"
         qtd = executa_select(cmd)[0][0]
+
+
         if qtd:
             self.oldqtd = qtd
         else:
@@ -51,6 +60,9 @@ class edit_limitesoi(QtWidgets.QWidget):
         self.ui.qcomboboxtipocred.currentIndexChanged.connect(self.changes)
 
     def updatebutton_click(self):
+        """ Executada quando o usuario clica no botao
+            executa o comando SQL responsavel por atualizar a quantidade de credenciais referente aquele tipo para o OI selecionado
+        """
         oi = self.ui.qcomboboxoi.currentText()
         tipo = self.ui.qcomboboxtipocred.currentText()
         qtd = self.ui.qspinboxqtd.value()

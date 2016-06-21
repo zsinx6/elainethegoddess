@@ -18,7 +18,12 @@ class edit_limitescomite(QtWidgets.QWidget):
         self.ui.setupUi(self)
         self.connect_signals()
         self.ui.qspinboxqtd.setMaximum(9999999)
+
+        #seleciona todos os comites
         comites = select('comite', ['nome'])
+
+        """verificacao
+        """
         if not comites:
             showdialog('Alerta', 'Nenhum Comitê cadastrado')
         tipos = select('tipo_credencial', ['sigla'])
@@ -26,6 +31,7 @@ class edit_limitescomite(QtWidgets.QWidget):
             showdialog('Alerta', 'Nenhum Tipo de Credencial cadastrado')
         if not tipos or not comites:
             return
+
         cmd = "SELECT quantidade FROM limites_comite WHERE comite = '" + comites[0][0] + """' AND
         tipo_credencial = '""" + tipos[0][0] + "';"
         qtd = executa_select(cmd)[0][0]
@@ -47,6 +53,8 @@ class edit_limitescomite(QtWidgets.QWidget):
         self.ui.qcomboboxtipocred.currentIndexChanged.connect(self.changes)
 
     def updatebutton_click(self):
+        """trata o evento do click, aqui  no caso edita os limites do tipo de credencial selecionado para um certo OI
+        """
         comite = self.ui.qcomboboxcomite.currentText()
         tipo = self.ui.qcomboboxtipocred.currentText()
         qtd = self.ui.qspinboxqtd.value()
@@ -56,6 +64,8 @@ class edit_limitescomite(QtWidgets.QWidget):
         executa_cmd(cmd)
 
     def changes(self):
+        """seleciona as quantidades disponiveis de um comite, relacionadas a um tipo de credencial
+        """
         comite = self.ui.qcomboboxcomite.currentText()
         tipo = self.ui.qcomboboxtipocred.currentText()
         cmd = "SELECT quantidade FROM limites_comite WHERE comite = '" + comite + """' AND
