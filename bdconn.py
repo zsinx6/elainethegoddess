@@ -1,13 +1,14 @@
 import psycopg2
 from PyQt5 import QtWidgets
 
+DB_CONNECT_PARAMETERS = 'dbname=bd user=lucas password=1234'
 
 def select(tabela, attr=None):
     """ recebe o nome da tabela e os atributos a serem selecionados
         se attr=None seleciona todos atributos
     """
     try:
-        conn = psycopg2.connect("dbname=BD user=lucas")
+        conn = psycopg2.connect(DB_CONNECT_PARAMETERS)
         cur = conn.cursor()
     except(Exception):
         showdialog("Erro no banco",
@@ -38,7 +39,7 @@ def insert(tabela, kwargs):
         [nome_attr1 => valor1, ..., nome_attr_k => valor_k]
     """
     try:
-        conn = psycopg2.connect("dbname=BD user=lucas")
+        conn = psycopg2.connect(DB_CONNECT_PARAMETERS)
         cur = conn.cursor()
     except(Exception):
         showdialog("Erro no banco",
@@ -62,7 +63,7 @@ def insert(tabela, kwargs):
 
 def executa_select(cmd):
     try:
-        conn = psycopg2.connect("dbname=BD user=lucas")
+        conn = psycopg2.connect(DB_CONNECT_PARAMETERS)
         cur = conn.cursor()
     except(Exception):
         showdialog("Erro no banco",
@@ -83,7 +84,7 @@ def executa_select(cmd):
 
 def executa_cmd(cmd):
     try:
-        conn = psycopg2.connect("dbname=BD user=lucas")
+        conn = psycopg2.connect(DB_CONNECT_PARAMETERS)
         cur = conn.cursor()
     except(Exception):
         showdialog("Erro no banco",

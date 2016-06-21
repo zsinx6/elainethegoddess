@@ -1,0 +1,46 @@
+
+REQUERIMENTOS
+
+	- PostgreSQL - no desenvolvimento foi usada versão 9.5.3, mas versões anteriores, até certo ponto, devem funcionar
+	- Python 3 (recomenda-se versão 3.4.2 ou superior, versões anteriores não foram testadas)
+	- Qt5 (para o PyQt5 listado abaixo)
+	- Módulos de Python: PyQt5 e psycopg2
+
+Os dois últimos itens podem ou não ser difíceis de instalar, dependendo do sistema operacional em questão. Por isso, a sessão seguinte contém um tutorial
+detalhando uma maneira de realizar tal instalação em um ambiente com Linux (Debian 8). Se você já tem tais requisitos instalados ou sabe que é capaz de instalá-los por conta própria, ignore a seção seguinte.
+
+
+COMO INSTALAR QT5, PYQT5 E PSYCOPG2 (DEBIAN 8)
+
+	1) Instale os pacotes python3-psycopg2, python3-dev e qt5-default
+		sudo apt-get install python3-psycopg2 python-dev qt5-default
+
+	2) Baixe o SIP (https://riverbankcomputing.com/software/sip/download) e o PyQt5 (https://riverbankcomputing.com/software/pyqt/download5)
+	
+	3) Descompacte o SIP (por exemplo, com `tar zxvf sip-4.18.tar.gz`)
+	
+	4) Na pasta recém descompactada do SIP, execute:
+		python3 configure.py
+		sudo make
+		sudo make install
+
+	5) Repita os passos 3) e 4) para o PyQt5. A compilação do PyQt5 pode demorar alguns minutos.
+
+
+CONFIGURANDO O BANCO DE DADOS
+
+Para construir o banco de dados local no PostgreSQL, basta rodar (por exemplo, com \i, no caso do terminal) o script build_all.sql, ou, alternativamente, os scripts procedures.sql, tables.sql e triggers.sql, NESSA ORDEM. O arquivo build_all.sql é meramente uma concatenação dos três outros arquivos citados.
+
+Além do banco, deve ser configurada a conexão da aplicação do banco. Para fazê-lo, basta alterar a linha 3 no arquivo bdconn.py
+	
+	DB_CONNECT_PARAMETERS = "dbname=bd user=lucas"
+
+para os dados apropriados.
+
+
+EXECUTANDO A APLICAÇÃO
+
+	Realizados os procedimentos acima, para iniciar a aplicação, basta executar, em seu diretório:
+		python3 tela.py
+
+
