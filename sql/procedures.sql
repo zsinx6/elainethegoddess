@@ -15,11 +15,11 @@ BEGIN
 	from orgao_imprensa oi
 	where oi.id = orgao_id;
 
-	-- Contando a quantidade de credenciais do tipo em questão já alocadas pelo comitê.
+	-- Contando a quantidade de credenciais do tipo em questão já alocadas pelo comitê (não conta as para o orgão orgao_id pois este será atualizado)
 	select sum(lim.quantidade)
 	into alocado
 	from limites_oi lim join orgao_imprensa oi on lim.orgao_imprensa = oi.id
-	where oi.comite = com and lim.tipo_credencial = tipo_cred;
+	where oi.comite = com and lim.tipo_credencial = tipo_cred and oi.id <> orgao_id;
 
 	IF (alocado IS NULL) THEN
 		alocado = 0;

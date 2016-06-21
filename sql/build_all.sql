@@ -1,5 +1,3 @@
--- Procedures para checks (procedures.sql)
-
 -- Ao ser alocada certa quantidade de credenciais de certo tipo para certo órgão de imprensa via tabela limites_oi,
 -- é preciso verificar se o total de alocações de credenciais daquele tipo não excede o total disponível para o comitê
 -- (determinado na tabela limites_comite).
@@ -17,11 +15,11 @@ BEGIN
 	from orgao_imprensa oi
 	where oi.id = orgao_id;
 
-	-- Contando a quantidade de credenciais do tipo em questão já alocadas pelo comitê.
+	-- Contando a quantidade de credenciais do tipo em questão já alocadas pelo comitê (não conta as para o orgão orgao_id pois este será atualizado)
 	select sum(lim.quantidade)
 	into alocado
 	from limites_oi lim join orgao_imprensa oi on lim.orgao_imprensa = oi.id
-	where oi.comite = com and lim.tipo_credencial = tipo_cred;
+	where oi.comite = com and lim.tipo_credencial = tipo_cred and oi.id <> orgao_id;
 
 	IF (alocado IS NULL) THEN
 		alocado = 0;
@@ -75,10 +73,6 @@ BEGIN
 	RETURN FALSE;
 END;
 $$ LANGUAGE plpgsql;
-
-
---Criação as tabelas (tables.sql)
-
 CREATE TABLE comite
 (
 	pais varchar(30) DEFAULT '-' NOT NULL,	-- O traço (-) representa o Comitê Paralímpico Internacional (IPC), o qual não tem país.
@@ -162,10 +156,6 @@ CREATE TABLE limites_oi
 	CHECK(verifica_limites_comite(orgao_imprensa, tipo_credencial, quantidade))
 	--O CHECK garante que não será possível que um comitê aloque a seus OIs mais credenciais de certo tipo do que possui disponível (especificado na tabela limites_comite)
 );
-
-
---Criação de triggers para inserções automáticas (triggers.sql)
-
 -- Quando um comitê é inserido, a tabela limites_comite (que para cada par comite, tipo_de_credencial associa
 -- o número de credenciais daquele tipo disponíveis para o comitê) precisa ser atualizada para guardar os limites do novo comitê.
 -- Para cada tipo de credencial existente, é adicionada uma nova entrada em limites_comite para o comitê recém adicionado.
