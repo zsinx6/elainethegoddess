@@ -1,7 +1,7 @@
 import psycopg2
 from PyQt5 import QtWidgets
 
-DB_CONNECT_PARAMETERS = 'dbname=bd user=lucas password=1234'
+DB_CONNECT_PARAMETERS = 'dbname=projdb user=postgres password=yy09lop'
 
 def select(tabela, attr=None):
     """ recebe o nome da tabela e os atributos a serem selecionados

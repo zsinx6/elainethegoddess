@@ -113,6 +113,8 @@ class add_pi(QtWidgets.QWidget):
                     if insert('profissional_imprensa', kwargs):
                         self.parent().hide()
                         self.parent().parent().setWindowTitle(self.parent().parent().title)
+                    else:
+                        showdialog ('Erro', 'Error na insercao, verifique se o profissional ja nao esta registrado!');
             else:
                 showdialog('Erro', 'Os campos nome e função são obrigatórios')
         else:

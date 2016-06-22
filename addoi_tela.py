@@ -58,6 +58,8 @@ class add_oi(QtWidgets.QWidget):
             if(insert('orgao_imprensa', kwargs)):
                 self.parent().hide()
                 self.parent().parent().setWindowTitle(self.parent().parent().title)
+            else:
+                showdialog ('Erro', 'Erro na insercao, verifique se um OI com esse nome ja nao esta cadastrado!');
         else:
             showdialog('Erro', 'O campo nome é obrigatório')
 
