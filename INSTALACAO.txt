@@ -41,6 +41,6 @@ para os dados apropriados.
 EXECUTANDO A APLICAÇÃO
 
 	Realizados os procedimentos acima, para iniciar a aplicação, basta executar, em seu diretório:
-		python3 tela.py
+		python3 src/tela.py
 
 
