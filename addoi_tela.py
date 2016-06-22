@@ -59,7 +59,7 @@ class add_oi(QtWidgets.QWidget):
                 self.parent().hide()
                 self.parent().parent().setWindowTitle(self.parent().parent().title)
             else:
-                showdialog ('Erro', 'Erro na insercao, verifique se um OI com esse nome ja nao esta cadastrado!');
+                showdialog ('Erro', 'Erro na inserção, verifique se um OI com esse nome já não está cadastrado!');
         else:
             showdialog('Erro', 'O campo nome é obrigatório')
 

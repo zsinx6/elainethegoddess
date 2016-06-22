@@ -43,7 +43,7 @@ class add_tipocred(QtWidgets.QWidget):
                 self.parent().hide()
                 self.parent().parent().setWindowTitle(self.parent().parent().title)
             else:
-                showdialog ('Erro', 'Erro na insercao, verifique se esse tipo de credencial, ja nao existe');
+                showdialog ('Erro', 'Erro na inserção, verifique se esse tipo de credencial, já não existe');
         else:
             showdialog("Erro", "Todos os campos devem ser preenchidos!")
 

@@ -42,7 +42,7 @@ class add_comite(QtWidgets.QWidget):
                 self.parent().hide()
                 self.parent().parent().setWindowTitle(self.parent().parent().title)
             else:
-                showdialog ('Erro', "Erro na insercao, verifique se o comite ja nao esta cadastrado");
+                showdialog ('Erro', "Erro na inserção, verifique se o comite já não está cadastrado");
                 
         else:
             showdialog('Erro', 'Os campos país, nome e presidente são obrigatórios')
